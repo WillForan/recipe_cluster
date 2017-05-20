@@ -45,13 +45,13 @@ V(g)$color <- mem + 1
 plot(g,mark.groups=com,vertex.size=3, edge.lty="blank",vertex.label=NA) 
 dev.off()
 
-# too many edges to graph -- remove those that are at least 1sd from mean
-# not very useful
-edgthres <- mean(m[m>0] + .5* sd(m[m>0]))
-gsmall<-delete.edges(g, which( E(g)$weight <= edgthres ) )
-gsmall$layout <- layout.fruchterman.reingold
-V(gsmall)$color <-mem +1
-plot(gsmall,mark.groups=com,vertex.size=2, vertex.label=NA) # ,edge.lty="blank"
+## too many edges to graph -- remove those that are at least 1sd from mean
+## not very useful
+# edgthres <- mean(m[m>0] + .5* sd(m[m>0]))
+# gsmall<-delete.edges(g, which( E(g)$weight <= edgthres ) )
+# gsmall$layout <- layout.fruchterman.reingold
+# V(gsmall)$color <-mem +1
+# plot(gsmall,mark.groups=com,vertex.size=2, vertex.label=NA) # ,edge.lty="blank"
 
 
 ## explore clusetrs
@@ -73,6 +73,14 @@ cat(sort(sprintf("%03d\t%s\n",as.numeric(names(topofclust)),lapply(topofclust,pa
 #030    ginger peanut sesame_seed firm_tofu sesame_oil
 #174    vanilla_extract vanilla baking_powder strawberries margarine
 #189    celery oil cilantro basil potato
+
+## if not choping off the top (e.g salt)
+#001     arrowroot
+#001    currant
+#001    double_cream
+#002    sauerkraut rye_bread
+#190    granulated_sugar water egg butter flour
+#225    salt onion garlic tomato olive_oil
 
 
 
