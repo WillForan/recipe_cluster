@@ -53,3 +53,26 @@ gsmall$layout <- layout.fruchterman.reingold
 V(gsmall)$color <-mem +1
 plot(gsmall,mark.groups=com,vertex.size=2, vertex.label=NA) # ,edge.lty="blank"
 
+
+## explore clusetrs
+# go through each cluster, and for each node lookup the total that ingredient is seen. sort within cluster by seen.
+# hint: totals can be accessed by ingredient name: 
+#  totals['grape_juice']  # is 12
+gettotal  <- function(n) totals[n]
+sorttotal <- function(c) sort(decreasing=T, sapply(c,gettotal) )
+clustByPopularity <- lapply(com,sorttotal) 
+
+# get only the top 3 from each cluster (and change  'name.name' to 'name')
+topofclust <- lapply(clustByPopularity,function(l) gsub('\\..*','',names(head(l,n=5))) )
+# add node count as the list item name
+names(topofclust ) <- lapply(clustByPopularity,length) 
+# ugly hack to "pretty print top clusters
+cat(sort(sprintf("%03d\t%s\n",as.numeric(names(topofclust)),lapply(topofclust,paste,collapse=" "))))
+#001    sunflower_seeds                                                                                                                        
+#003    arrowroot yam grape_juice
+#030    ginger peanut sesame_seed firm_tofu sesame_oil
+#174    vanilla_extract vanilla baking_powder strawberries margarine
+#189    celery oil cilantro basil potato
+
+
+
