@@ -15,7 +15,7 @@ txt/ingredient.list: parse.pl txt/cookbook_import_pages_current.xml
 	./parse.pl txt/cookbook_import_pages_current.xml > txt/ingredient.list 
 
 txt/cormat.txt: mkmat.pl txt/ingredient.list
-	./mkmat.pl txt/ingredient.list > cormat.txt
+	./mkmat.pl txt/ingredient.list > txt/cormat.txt
 
 imgs/fullgraph.png: cluster.R txt/cormat.txt
 	if [ ! -d imgs ]; then mkdir imgs; fi
